@@ -14,7 +14,7 @@ defmodule Elibot.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -27,6 +27,8 @@ defmodule Elibot.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    []
+    [{:httpoison, "~> 0.6.2"},
+     {:poison, "~> 1.4.0"},
+     {:websocket_client, github: "jeremyong/websocket_client"}]
   end
 end
