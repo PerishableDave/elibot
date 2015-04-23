@@ -5,7 +5,7 @@ defmodule Elibot.EventServer do
   end
 
   def handle_event(conn, event) do
-    GenEvent.notify(__MODULE__, [conn, event])
+    GenEvent.notify(__MODULE__, {conn, event})
   end
 
   def add_handler(handler, args) do
