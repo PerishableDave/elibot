@@ -23,7 +23,18 @@ defmodule Elibot.EventServerTest do
 
   test "add handler" do
     EventServer.add_handler(MockHandler, self)
+    assert [MockHandler] == GenEvent.which_handlers(EventServer)
+  end
+
+  test "remove handler" do
+    EventServer.add_handler(MockHandler, self)
+    EventServer.remove_handler(MockHandler, [])
+    assert [] == GenEvent.which_handlers(EventServer)
+  end
+
+  test "event is handled" do
+    EventServer.add_handler(MockHandler, self)
     EventServer.handle_event(:conn, :event)
-    assert_received {:conn, :event}
+    assert_receive {:conn, :event}
   end
 end
